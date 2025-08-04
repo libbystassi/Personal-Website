@@ -1,0 +1,443 @@
+/* Custom CSS for Barbie Fashionista Vibe */
+:root {
+    /* Dominant Colors */
+    --hot-pink: #FF007F; /* A vibrant, classic hot pink */
+    --fuchsia: #FF00FF;  /* A bright, intense fuchsia */
+    --bubblegum-pink: #FFC0CB; /* A softer, playful pink */
+    --lavender: #E6E6FA; /* A light, dreamy lavender */
+
+    /* Accent Colors */
+    --gold: #FFD700;     /* Pure gold */
+    --sparkly-black: #1A1A1A; /* Very dark grey for a "sparkly black" base */
+    --white: #FFFFFF;    /* Clean white */
+
+    /* General Text & Backgrounds */
+    --text-dark: var(--sparkly-black);
+    --text-light: var(--white);
+    --bg-light: var(--lavender); /* Light lavender background */
+    --border-color: var(--hot-pink); /* Using hot pink for borders */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    position: relative; /* Needed for pseudo-elements */
+    background-image:
+        radial-gradient(circle at 10% 20%, var(--bubblegum-pink) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, var(--lavender) 0%, transparent 30%), /* Changed from mint */
+        linear-gradient(135deg, var(--lavender) 0%, var(--hot-pink) 100%);
+    background-size: 150% 150%; /* Larger to allow animation */
+    animation: backgroundShift 20s ease infinite alternate; /* Smooth, shifting background */
+}
+
+/* Twinkle/Sparkle Effect Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Updated SVG for more varied and noticeable sparkles */
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+CiAgICA8Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIyLjUiIGZpbGw9ImdvbGQiIG9wYWNpdHk9IjAuOCIvPgogICAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNyIvPgogICAgPGNpcmNsZSBjeD0iOTAiIGN5PSIzMCIgcj0iMyIgZmlsbD0ic2lsdmVyIiBvcGFjaXR5PSIwLjkiLz4KICAgIDxjaXJjbGUgY3g9IjMwIiBjeT0iNzAiIHI9IjEuNSIgZmlsbD0icGluayIgb3BhY2l0eT0iMC42Ii8+CiAgICA8Y2lyY2xlIGN4PSI3MCIgY3k9IjE1IiByPSIxIiBmaWxsPSJnb2xkIiBvcGFjaXR5PSIwLjUiLz4KICAgIDxjaXJjbGUgY3g9IjIwIiBjeT0iOTAiIHI9IjIiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjgiLz4KICAgIDxjaXJjbGUgY3g9IjgwIiBjeT0iNjAiIHI9IjEuNSIgZmlsbD0icGluayIgb3BhY2l0eT0iMC43Ii8+CiAgICA8Y2lyY2xlIGN4PSI0NSIgY3k9IjQwIiByPSIyLjUiIGZpbGw9ImdvbGQiIG9wYWNpdHk9IjAuNyIvPgogICAgPGNpcmNsZSBjeD0iNjUiIGN5PSI4NSIgcj0iMS4yIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC42Ii8+CiAgICA8Y2lyY2xlIGN4PSI1IiBjeT0iNTAiIHI9IjIiIGZpbGw9InNpbHZlciIgb3BhY2l0eT0iMC44Ii8+CiAgICA8Y2lyY2xlIGN4PSIxMDAlIiBjeT0iMCIgcj0iMC44IiBmaWxsPSJnb2xkIiBvcGFjaXR5PSIwLjUiLz4KICAgIDxjaXJjbGUgY3g9IjAiIGN5PSIxMDAlIiByPSIxLjUiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjciLz4KICAgIDxjaXJjbGUgY3g9IjEwMCUiIGN5PSIxMDAlIiByPSIyIiBmaWxsPSJwaW5rIiBvcGFjaXR5PSIwLjkiLz4KICAgPC9zdmc+');
+    background-repeat: repeat;
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: -1; /* Place behind content */
+    opacity: 0.7; /* Adjust sparkle visibility */
+    animation: sparkleFade 15s infinite alternate; /* Subtle sparkle animation */
+}
+
+@keyframes backgroundShift {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+@keyframes sparkleFade {
+    0% { opacity: 0.7; }
+    50% { opacity: 0.5; }
+    100% { opacity: 0.7; }
+}
+
+header {
+    background-color: var(--hot-pink);
+    color: var(--text-light);
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    margin-bottom: 2rem;
+    font-family: 'Playfair Display', serif;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px var(--fuchsia);
+}
+
+header p {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* Fixed Home Button Styling */
+.fixed-home-button {
+    position: fixed;
+    top: 150px; /* Position from top, adjusted to be below header */
+    left: 30px; /* Position from left */
+    right: auto; /* Ensure right positioning is removed */
+    bottom: auto; /* Ensure bottom positioning is removed */
+    z-index: 1000; /* Ensure it's above other content */
+    background-color: var(--hot-pink); /* Solid cute pink */
+    border-radius: 50%; /* Make it round */
+    width: 80px; /* Slightly bigger */
+    height: 80px; /* Slightly bigger */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), /* Soft shadow */
+                0 0 20px 5px var(--gold), /* Gold sparkle glow */
+                0 0 30px 10px var(--fuchsia); /* Fuchsia sparkle glow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Removed background-image (zebra print) */
+}
+
+.fixed-home-button:hover {
+    transform: scale(1.1) rotate(5deg); /* Slight rotation on hover */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3),
+                0 0 30px 8px var(--gold),
+                0 0 40px 15px var(--fuchsia);
+}
+
+.home-icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--white); /* White icon and text for better contrast on hot pink */
+    font-size: 1.2rem; /* Icon size */
+    font-weight: 700;
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.home-icon-link i {
+    font-size: 2.5rem; /* Larger icon */
+    margin-bottom: 5px;
+}
+
+nav {
+    background-color: var(--fuchsia);
+    padding: 1rem 0;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    overflow-x: auto; /* Allows horizontal scrolling for many links */
+    white-space: nowrap; /* Keeps links on one line */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0 1rem; /* Added horizontal padding to ensure full scrollability */
+    margin: 0;
+    display: flex;
+    justify-content: flex-start; /* Changed to flex-start for better scrollability */
+    gap: 1.5rem; /* Space between links */
+}
+
+nav li {
+    display: inline-block; /* For horizontal layout */
+}
+
+nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    background-color: transparent; /* Default state */
+    display: block; /* Make the whole padding area clickable */
+}
+
+nav a:hover,
+nav a.active {
+    background-color: var(--hot-pink);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+main {
+    flex-grow: 1;
+    padding: 0 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-content {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    margin-bottom: 2rem;
+    display: none; /* Hidden by default, controlled by JS */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.page-content.active {
+    display: block; /* Shown when active */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about-blurb {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: var(--bubblegum-pink);
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-blurb h2 {
+    color: var(--hot-pink);
+    font-family: 'Playfair Display', serif;
+}
+
+.about-blurb p {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem; /* Space between paragraphs */
+}
+
+/* Image placeholders for the homepage */
+.image-placeholder {
+    width: 200px; /* Smaller width */
+    height: 250px; /* Smaller height */
+    background-color: var(--hot-pink); /* Fallback color */
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden; /* Ensures image respects border-radius */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.image-placeholder:hover {
+    transform: scale(1.05);
+}
+
+.image-placeholder img {
+    /* Tailwind classes w-full h-full object-cover rounded-2xl are applied directly in HTML */
+    border-radius: inherit; /* Inherit border-radius from parent div */
+}
+
+/* Styles for the new book section */
+.book-entry {
+    background-color: var(--bubblegum-pink);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem; /* Space between book entries */
+    border: 2px solid var(--hot-pink);
+}
+
+.book-entry h3 {
+    color: var(--hot-pink);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 1rem;
+}
+
+.book-entry p, .book-entry ul {
+    color: var(--text-dark);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+}
+
+.book-entry ul {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem; /* Indent list items */
+}
+
+.book-entry ul li {
+    margin-bottom: 0.25rem;
+}
+
+/* Container for book images */
+.book-images-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem; /* Smaller gap for more images */
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Smaller image placeholders for book pages */
+.image-placeholder-small {
+    width: 150px; /* Adjusted width for book pages */
+    height: 200px; /* Adjusted height for book pages */
+    background-color: var(--hot-pink); /* Fallback color */
+    border-radius: 10px; /* Slightly less rounded than main images */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.image-placeholder-small:hover {
+    transform: scale(1.03);
+}
+
+.image-placeholder-small img {
+    border-radius: inherit;
+}
+
+/* Amazon Link Box and Button */
+.amazon-link-box {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: var(--fuchsia); /* A contrasting pink */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.amazon-button {
+    display: inline-block;
+    background-color: var(--gold); /* Gold button */
+    color: var(--sparkly-black); /* Dark text on gold */
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--gold); /* Gold border */
+}
+
+.amazon-button:hover {
+    background-color: var(--hot-pink); /* Hot pink on hover */
+    color: var(--white); /* White text on hover */
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--white); /* White border on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    /* Adjust fixed home button for smaller screens */
+    .fixed-home-button {
+        top: 100px; /* Adjusted for smaller screens */
+        left: 20px; /* Adjusted for smaller screens */
+        right: auto; /* Ensure right is auto */
+        bottom: auto; /* Ensure bottom is auto */
+        width: 60px;
+        height: 60px;
+    }
+
+    .home-icon-link i {
+        font-size: 2rem;
+    }
+    .home-icon-link span {
+        font-size: 0.8rem;
+    }
+
+    nav ul {
+        justify-content: flex-start; /* Align left on smaller screens */
+        padding: 0 1rem; /* Ensure padding on smaller screens too */
+    }
+
+    nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .page-content {
+        padding: 1rem;
+    }
+
+    .about-blurb {
+        padding: 1rem;
+    }
+
+    .about-blurb p {
+        font-size: 1rem;
+    }
+
+    .image-placeholder {
+        width: 180px; /* Even smaller for very small screens */
+        height: 220px;
+    }
+
+    .image-placeholder-small {
+        width: 120px; /* Adjust for smaller screens */
+        height: 160px;
+    }
+
+    .book-entry {
+        padding: 1rem;
+    }
+
+    .book-entry h3 {
+        font-size: 1.25rem;
+    }
+
+    .book-entry p, .book-entry ul {
+        font-size: 0.9rem;
+    }
+
+    .amazon-button {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-placeholder {
+        width: 150px;
+        height: 180px;
+    }
+    .image-placeholder-small {
+        width: 100px;
+        height: 130px;
+    }
+}
