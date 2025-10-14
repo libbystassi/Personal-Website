@@ -44,10 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault(); // Prevent default anchor link behavior
             const pageId = this.getAttribute('data-page');
             
-            // IMPORTANT: Set the hash on link clicks to keep the URL consistent
+            // IMPORTANT: Setting the hash triggers the 'hashchange' listener below
             window.location.hash = pageId; 
             
-            showPage(pageId);
+            // We still call showPage directly to ensure instant update in all browsers/scenarios
+            showPage(pageId); 
         });
     });
 
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault(); // Prevent default anchor link behavior
             const pageId = this.getAttribute('data-page');
             
-            // IMPORTANT: Set the hash on home click
+            // IMPORTANT: Setting the hash triggers the 'hashchange' listener below
             window.location.hash = pageId;
             
             showPage(pageId);
