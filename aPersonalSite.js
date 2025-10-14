@@ -65,6 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ====================================================================
+    // NEW FEATURE: INSTANT PAGE UPDATE ON HASH CHANGE
+    // This solves the problem of manually changing the URL hash and pressing Enter.
+    // ====================================================================
+    window.addEventListener('hashchange', function() {
+        // When the hash changes (e.g., from #page-A to #page-B), update the content.
+        const newPageId = window.location.hash.substring(1) || 'home';
+        showPage(newPageId);
+    });
+
+
+    // ====================================================================
     // INITIALIZATION LOGIC (THE DEFINITIVE FIX FOR DIRECT URL PASTES)
     // ====================================================================
 
