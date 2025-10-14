@@ -28,14 +28,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Add active class to the clicked navigation link
-        // Check if the clicked element is a nav-link or the fixed-home-link
         const clickedNavLink = document.querySelector(`[data-page="${pageId}"]`);
         if (clickedNavLink && clickedNavLink.classList.contains('nav-link')) {
             clickedNavLink.classList.add('active');
         }
         // Special handling for the fixed home button if it's the active one
         if (pageId === 'home' && fixedHomeLink) {
-            // No 'active' class on fixedHomeLink itself, but ensure other nav links are not active
             navLinks.forEach(link => link.classList.remove('active'));
         }
     }
@@ -45,6 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(event) {
             event.preventDefault(); // Prevent default anchor link behavior
             const pageId = this.getAttribute('data-page');
+            
+            // IMPORTANT: Set the hash on link clicks to keep the URL consistent
+            window.location.hash = pageId; 
+            
             showPage(pageId);
         });
     });
@@ -54,46 +56,61 @@ document.addEventListener('DOMContentLoaded', function() {
         fixedHomeLink.addEventListener('click', function(event) {
             event.preventDefault(); // Prevent default anchor link behavior
             const pageId = this.getAttribute('data-page');
+            
+            // IMPORTANT: Set the hash on home click
+            window.location.hash = pageId;
+            
             showPage(pageId);
         });
     }
 
-    // Initialize: Show the home page when the script loads
-    // Check if there's a hash in the URL (e.g., #personal-published-books)
-    // If so, navigate to that section; otherwise, default to 'home'.
-    let initialPageId = 'home';
-const path = window.location.pathname.replace(/^\/+|\/+$/g, ''); // Get and clean the path (e.g., 'personal-published-books')
-const hash = window.location.hash.substring(1); // Get the hash (e.g., 'personal-published-books')
+    // ====================================================================
+    // INITIALIZATION LOGIC (THE DEFINITIVE FIX FOR DIRECT URL PASTES)
+    // ====================================================================
 
-if (hash) {
-    // 1. Priority: If a hash exists (from a click or a hash link paste), use it.
-    initialPageId = hash;
-} else if (path && path !== 'index.html') {
-    // 2. Secondary: If no hash, but there's a path (from a direct clean URL paste), use the path.
-    initialPageId = path;
-    
-    // IMPORTANT: Update the browser URL to use the hash now.
-    // This makes sure future internal clicks and history tracking work correctly.
-    // Without this, the browser back button can get confused.
-    window.history.replaceState(null, null, '#' + path);
+    function initializePage() {
+        let initialPageId = 'home';
+        const hash = window.location.hash.substring(1); 
+        
+        // 1. Get the current URL pathname
+        let path = window.location.pathname.replace(/^\/+|\/+$/g, ''); 
 
-    // After replacing state, the window.location.hash will be updated for the showPage call.
+        // 2. Decode the path to handle URL encoding (%20 for space, %21 for !)
+        try {
+            path = decodeURIComponent(path);
+        } catch (e) {
+            // Handle decode error if path is malformed
+        }
+        
+        if (hash) {
+            // Priority 1: If a hash exists, use it.
+            initialPageId = hash;
+        } 
+        else if (path && path !== 'index.html' && path !== '') {
+            // Priority 2: If there's a clean path (from a direct paste), use it.
+            initialPageId = path;
+            
+            // CRITICAL: Update the browser URL to use the hash now.
+            // This corrects the address bar without causing a reload.
+            window.history.replaceState(null, null, '#' + path); 
+        } 
 
-} 
+        // 3. Display the determined page
+        showPage(initialPageId);
 
-// 3. Display the determined page
-showPage(initialPageId);
+        // 4. Update the navigation bar 'active' state
+        const activeIdForNav = initialPageId; 
+        const initialNavLink = document.querySelector(`[data-page="${activeIdForNav}"]`);
 
-// Ensure the correct nav link is active on initial load
-const activeIdForNav = initialPageId; // Use the determined ID to activate the nav link
-const initialNavLink = document.querySelector(`[data-page="${activeIdForNav}"]`);
-if (initialNavLink && initialNavLink.classList.contains('nav-link')) {
-    initialNavLink.classList.add('active');
-}
-// Handle the home link separately if active
-if (activeIdForNav === 'home' && fixedHomeLink) {
-    // Remove active from any other nav link
-    navLinks.forEach(link => link.classList.remove('active'));
-}
+        // Ensure all nav links are cleaned first before setting active state
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        if (initialNavLink && initialNavLink.classList.contains('nav-link')) {
+            initialNavLink.classList.add('active');
+        }
+    }
+
+    // Run the final, working initialization function
+    initializePage(); 
 
 });
