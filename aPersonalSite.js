@@ -62,11 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if there's a hash in the URL (e.g., #personal-published-books)
     // If so, navigate to that section; otherwise, default to 'home'.
     const initialPageId = window.location.hash ? window.location.hash.substring(1) : 'home';
-    showPage(initialPageId);
+showPage(initialPageId);
 
-    // Also, ensure the correct nav link is active on initial load if a hash exists
-    const initialNavLink = document.querySelector(`.nav-link[data-page="${initialPageId}"]`);
-    if (initialNavLink) {
-        initialNavLink.classList.add('active');
-    }
+// Also, ensure the correct nav link is active on initial load if a hash exists
+const initialNavLink = document.querySelector(`.nav-link[data-page="${initialPageId}"]`);
+if (initialNavLink) {
+    initialNavLink.classList.add('active');
+}
 });
