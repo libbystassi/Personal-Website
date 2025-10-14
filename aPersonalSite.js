@@ -61,12 +61,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize: Show the home page when the script loads
     // Check if there's a hash in the URL (e.g., #personal-published-books)
     // If so, navigate to that section; otherwise, default to 'home'.
-    const initialPageId = window.location.hash ? window.location.hash.substring(1) : 'home';
+    let initialPageId = 'home';
+const path = window.location.pathname.replace(/^\/+|\/+$/g, ''); // Get and clean the path (e.g., 'personal-published-books')
+const hash = window.location.hash.substring(1); // Get the hash (e.g., 'personal-published-books')
+
+if (hash) {
+    // 1. Priority: If a hash exists (from a click or a hash link paste), use it.
+    initialPageId = hash;
+} else if (path && path !== 'index.html') {
+    // 2. Secondary: If no hash, but there's a path (from a direct clean URL paste), use the path.
+    initialPageId = path;
+    
+    // IMPORTANT: Update the browser URL to use the hash now.
+    // This makes sure future internal clicks and history tracking work correctly.
+    // Without this, the browser back button can get confused.
+    window.history.replaceState(null, null, '#' + path);
+
+    // After replacing state, the window.location.hash will be updated for the showPage call.
+
+} 
+
+// 3. Display the determined page
 showPage(initialPageId);
 
-// Also, ensure the correct nav link is active on initial load if a hash exists
-const initialNavLink = document.querySelector(`.nav-link[data-page="${initialPageId}"]`);
-if (initialNavLink) {
+// Ensure the correct nav link is active on initial load
+const activeIdForNav = initialPageId; // Use the determined ID to activate the nav link
+const initialNavLink = document.querySelector(`[data-page="${activeIdForNav}"]`);
+if (initialNavLink && initialNavLink.classList.contains('nav-link')) {
     initialNavLink.classList.add('active');
 }
+// Handle the home link separately if active
+if (activeIdForNav === 'home' && fixedHomeLink) {
+    // Remove active from any other nav link
+    navLinks.forEach(link => link.classList.remove('active'));
+}
+
 });
